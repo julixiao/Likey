@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Likey
 //
-//  Created by Julie  on 2019-03-24.
+//  Created by Julie on 2019-03-24.
 //  Copyright © 2019 julixiao. All rights reserved.
 //
 
