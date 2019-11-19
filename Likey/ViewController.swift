@@ -10,7 +10,7 @@ import Cocoa
 
 class ViewController: NSViewController {
     @IBOutlet weak var subjectLabel: NSTextField!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
