@@ -9,8 +9,21 @@
 import Cocoa
 
 class ViewController: NSViewController {
-    @IBOutlet weak var subjectLabel: NSTextField!
-        
+
+    
+    @IBOutlet weak var nameField: NSTextField!
+    
+    @IBOutlet weak var ratingField: NSLevelIndicator!
+    
+    @IBOutlet weak var reviewField: NSTextField!
+    
+    @IBAction func addButton(_ sender: Any) {
+        var name = nameField.stringValue
+        if name.isEmpty {
+            name = "World"
+        }
+        let greeting = "Hello \(name)!"
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
