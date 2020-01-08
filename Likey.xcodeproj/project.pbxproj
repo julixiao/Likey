@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E3B77AFF23C61D9400D79116 /* reviews.json in Resources */ = {isa = PBXBuildFile; fileRef = E3B77AFE23C61D9400D79116 /* reviews.json */; };
+		E3B77B0323C620C200D79116 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B77B0223C620C200D79116 /* Entry.swift */; };
 		E3C99B6F2247F958009640EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C99B6E2247F958009640EE /* AppDelegate.swift */; };
 		E3C99B712247F958009640EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C99B702247F958009640EE /* ViewController.swift */; };
 		E3C99B732247F960009640EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3C99B722247F960009640EE /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E3B77AFE23C61D9400D79116 /* reviews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = reviews.json; sourceTree = "<group>"; };
+		E3B77B0223C620C200D79116 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		E3C99B6B2247F958009640EE /* Likey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Likey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3C99B6E2247F958009640EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3C99B702247F958009640EE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,8 +59,10 @@
 			children = (
 				E3C99B6E2247F958009640EE /* AppDelegate.swift */,
 				E3C99B702247F958009640EE /* ViewController.swift */,
+				E3B77B0223C620C200D79116 /* Entry.swift */,
 				E3C99B722247F960009640EE /* Assets.xcassets */,
 				E3C99B742247F961009640EE /* Main.storyboard */,
+				E3B77AFE23C61D9400D79116 /* reviews.json */,
 				E3C99B772247F961009640EE /* Info.plist */,
 				E3C99B782247F961009640EE /* Likey.entitlements */,
 			);
@@ -122,6 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3B77AFF23C61D9400D79116 /* reviews.json in Resources */,
 				E3C99B732247F960009640EE /* Assets.xcassets in Resources */,
 				E3C99B762247F961009640EE /* Main.storyboard in Resources */,
 			);
@@ -134,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3B77B0323C620C200D79116 /* Entry.swift in Sources */,
 				E3C99B712247F958009640EE /* ViewController.swift in Sources */,
 				E3C99B6F2247F958009640EE /* AppDelegate.swift in Sources */,
 			);

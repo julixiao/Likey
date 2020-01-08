@@ -8,6 +8,8 @@
 
 import Cocoa
 
+Bool newAddition = false
+
 class ViewController: NSViewController {
 
     
@@ -18,12 +20,14 @@ class ViewController: NSViewController {
     @IBOutlet weak var reviewField: NSTextField!
     
     @IBAction func addButton(_ sender: Any) {
-        var name = nameField.stringValue
-        if name.isEmpty {
-            name = "World"
-        }
-        let greeting = "Hello \(name)!"
+        
+        entryList[entryList.count].title = nameField.stringValue
+        entryList[entryList.count].rating = (String)(ratingField.intValue)
+        entryList[entryList.count].comments = reviewField.stringValue
+        
+        newAddition = true
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
