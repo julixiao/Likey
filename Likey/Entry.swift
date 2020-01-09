@@ -7,17 +7,19 @@
 //
 
 import Cocoa
-
-var entryList = [Entry.Entry]()
+/*
 class Entry: NSObject {
+    
+    static func getReviews(completion:((_ json: Data?) -> Void)) {
+        completion(Data(reviews.utf8))
+    }
 
     struct Entry : Codable {
         var title: String
         var rating: String
         var comments: String
-        var count: Int
     }
-    
+
     func decodeData(pathName: URL){
         do{
             let jsonData = try Data(contentsOf: pathName)
@@ -40,7 +42,7 @@ class Entry: NSObject {
             decodeData(pathName: mainPath)
         }
         
-        self.tableView.reloadData()
+        // self.tableView.reloadData()
     }
     
     func readEntries(fileName: String) {
@@ -67,3 +69,4 @@ class Entry: NSObject {
     }
     
 }
+*/
