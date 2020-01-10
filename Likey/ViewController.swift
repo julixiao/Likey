@@ -37,22 +37,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         catch {}
     }*/
     
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        var rows = 0
-        guard let reviewsArray = readJsonFile(fileName: "review") else { return 0 }
-        for _ in reviewsArray {
-            rows += 1
-        }
-        return rows
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        // Do any additional setup after loading the view.
-    }
-    
-    func readJsonFile(fileName: String) -> [Any]? {
+    /* func readJsonFile(fileName: String) -> [Any]? {
         if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
             do {
                 let jData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
@@ -63,26 +48,45 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
                 print (err.localizedDescription)
             }
         }
-        
         return nil
+    }*/
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        var rows = 0
+        if let path = Bundle.main.path(forResource: "reviews", ofType: "json") {
+            do {
+                let jData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                if let reviewsArray = try JSONSerialization.jsonObject(with: jData, options: []) as? [Any] {
+                    for _ in reviewsArray {
+                        rows += 1
+                    }
+                }
+            } catch let err {
+                print (err.localizedDescription)
+            }
+        }
+        return rows
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
         // Entry.getReviews { jsonData in
         //  guard let jData = jsonData else { return }
-        let reviewsArray = readJsonFile(fileName: "review")
+        let entry = Entry().decodeJsonFile(fileName: "reviews", row: row)
         do {
-            if let dict = reviewsArray?[row] as? [String: Any], let title = dict["Title"] as? String {
-                if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "reviewCell"), owner: nil) as? NSTableCellView {
-                    cell.textField?.stringValue = title
-                    return cell
-                }
+            if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "reviewCell"), owner: nil) as? NSTableCellView {
+                cell.textField?.stringValue = entry.title
+                return cell
             }
-        } catch let err {
-            print (err.localizedDescription)
         }
         return nil
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+        // Do any additional setup after loading the view.
     }
     
     override var representedObject: Any? {

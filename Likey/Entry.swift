@@ -7,57 +7,37 @@
 //
 
 import Cocoa
-/*
+
 class Entry: NSObject {
     
-    static func getReviews(completion:((_ json: Data?) -> Void)) {
-        completion(Data(reviews.utf8))
-    }
-
     struct Entry : Codable {
-        var title: String
-        var rating: String
-        var comments: String
+        var title = ""
+        var rating = ""
+        var comments = ""
+        
+        enum CodingKeys: String, CodingKey {
+            case title = "Title"
+            case rating = "Rating"
+            case comments = "Comments"
+        }
     }
 
-    func decodeData(pathName: URL){
-        do{
-            let jsonData = try Data(contentsOf: pathName)
-            let decoder = JSONDecoder()
-            entryList = try decoder.decode([Entry].self, from: jsonData)
-        }
-        catch {}
-    }
-    
-    func loadFile(mainPath: URL, subPath: URL){
-        let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: subPath.path){
-            decodeData(pathName: subPath)
-            
-            if entryList.isEmpty{
-                decodeData(pathName: mainPath)
+    func decodeJsonFile(fileName: String, row: Int) -> Entry {
+        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
+            do {
+                let jData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let decoder = JSONDecoder()
+                let reviewsArray = try! decoder.decode([Entry].self, from: jData)
+                return reviewsArray[row]
+            } catch let err {
+                print (err.localizedDescription)
             }
-            
-        }else{
-            decodeData(pathName: mainPath)
         }
-        
-        // self.tableView.reloadData()
+        let emptyEntry = Entry()
+        return emptyEntry
     }
-    
-    func readEntries(fileName: String) {
-        guard let mainUrl = Bundle.main.url(forResource: fileName, withExtension: "json") else { return }
-        
-        do {
-            let fileManager = FileManager.default
-            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
-            let subUrl = documentDirectory.appendingPathComponent(fileName)
-            loadFile(mainPath: mainUrl, subPath: subUrl)
-        } catch {
-            print(error)
-        }
-    }
-    
+}
+    /*
     func writeToFile(location: URL) {
         do{
             let encoder = JSONEncoder()
