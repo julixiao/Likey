@@ -15,6 +15,18 @@
 		E3C99B762247F961009640EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3C99B742247F961009640EE /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		E3A0544F23C93B8A0092B1BA /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = image.tiff;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# builtin-copyTiff\n";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
 		E3B77AFE23C61D9400D79116 /* reviews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = reviews.json; sourceTree = "<group>"; };
 		E3B77B0223C620C200D79116 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
@@ -81,6 +93,7 @@
 				E3C99B692247F958009640EE /* Resources */,
 			);
 			buildRules = (
+				E3A0544F23C93B8A0092B1BA /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -102,6 +115,11 @@
 					E3C99B6A2247F958009640EE = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1030;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

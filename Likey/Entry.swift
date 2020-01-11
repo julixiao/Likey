@@ -7,46 +7,82 @@
 //
 
 import Cocoa
+import Foundation
 
-class Entry: NSObject {
+struct Entry : Codable {
+    var title = ""
+    var rating = ""
+    var comments = ""
     
-    struct Entry : Codable {
-        var title = ""
-        var rating = ""
-        var comments = ""
-        
-        enum CodingKeys: String, CodingKey {
-            case title = "Title"
-            case rating = "Rating"
-            case comments = "Comments"
-        }
+    init(title: String, rating: String, comments: String) {
+        self.title   = title
+        self.rating = rating
+        self.comments  = comments
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case title = "Title"
+        case rating = "Rating"
+        case comments = "Comments"
+    }
+    
+    func encodeJson(entry: Entry, filePath: URL) {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        //let jsonDict = try! encoder.encode(entry)
 
-    func decodeJsonFile(fileName: String, row: Int) -> Entry {
-        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
+        if let jsonDict = try? encoder.encode(entry) {
+            //if let path = Bundle.main.path(forResource: filePath, ofType: "json") {
+            let pathAsURL = filePath
+            let jsonString = String(data: jsonDict, encoding: String.Encoding.utf8)
             do {
-                let jData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let decoder = JSONDecoder()
-                let reviewsArray = try! decoder.decode([Entry].self, from: jData)
-                return reviewsArray[row]
-            } catch let err {
-                print (err.localizedDescription)
+                try jsonString?.appendLineToURL(fileURL: pathAsURL)
+            }
+            catch {
+                print("Failed to write JSON data: \(error.localizedDescription)")
             }
         }
-        let emptyEntry = Entry()
+    }
+    
+    func decodeJsonFile(filePath: URL, row: Int) -> Entry {
+        do {
+            let jData = try Data(contentsOf: filePath, options: .mappedIfSafe)
+            let decoder = JSONDecoder()
+            let reviewsArray = try! decoder.decode([Entry].self, from: jData)
+            return reviewsArray[row]
+        } catch let err {
+            print (err.localizedDescription)
+        }
+    
+        let emptyEntry = Entry(title: "", rating: "", comments: "")
         return emptyEntry
     }
 }
-    /*
-    func writeToFile(location: URL) {
-        do{
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-            let JsonData = try encoder.encode(entryList)
-            try JsonData.write(to: location)
-        }
-        catch{}
+
+extension String {
+    func appendLineToURL(fileURL: URL) throws {
+        try (", \n" + self + "\n ]").appendToURL(fileURL: fileURL)
     }
-    
+
+    func appendToURL(fileURL: URL) throws {
+        let data = self.data(using: String.Encoding.utf8)!
+        try data.append(fileURL: fileURL)
+    }
 }
-*/
+
+extension Data {
+    func append(fileURL: URL) throws {
+        if let fileHandle = FileHandle(forWritingAtPath: fileURL.path) {
+            defer {
+                fileHandle.closeFile()
+            }
+            var bracket = fileHandle.seekToEndOfFile()
+            bracket = bracket-3
+            fileHandle.seek(toFileOffset: bracket)
+            fileHandle.write(self)
+        }
+        else {
+            try write(to: fileURL, options: .atomic)
+        }
+    }
+}
