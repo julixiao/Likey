@@ -19,9 +19,31 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     @IBOutlet weak var ratingField: NSLevelIndicator!
     
+    @IBOutlet weak var sortChoiceMenu: NSPopUpButton!
+    
+    @IBOutlet weak var newEntryButton: NSButton!
+
+    @IBAction func sortFilter(_ sender: NSPopUpButton) {
+        do{
+            if let sortChoice = sortChoiceMenu.titleOfSelectedItem {
+                let reviewsArray = Entry(title: "", rating: "", comments: "").decodeStoreJsonFile(filePath: filePath, sortMethod: sortChoice)
+                for review in reviewsArray{
+                    review.encodeJson(entry: review, filePath: filePath)
+                }
+                tableView.reloadData()
+            }
+        } catch let err {
+            print (err.localizedDescription)
+        }
+    }
+    
     @IBAction func addButton(_ sender: Any) {
         let newEntry = Entry(title: titleField.stringValue, rating: ratingField.stringValue, comments: commentsField.stringValue)
         newEntry.encodeJson(entry: newEntry, filePath: filePath)
+        tableView.reloadData()
+        titleField.stringValue = ""
+        ratingField.stringValue = ""
+        commentsField.stringValue = ""
     }
     
     func getFilePath() -> URL {

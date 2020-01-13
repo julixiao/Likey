@@ -748,7 +748,7 @@
                                                     <tableColumns>
                                                         <tableColumn identifier="reviewColumn" editable="NO" width="116" minWidth="40" maxWidth="1000" id="qwX-NX-56F">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Reviews">
-                                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                                <font key="font" metaFont="label" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -796,31 +796,41 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableHeaderView>
                                     </scrollView>
-                                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phh-PS-vPm">
-                                        <rect key="frame" x="18" y="388" width="89" height="25"/>
+                                    <popUpButton identifier="sortFilter" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phh-PS-vPm">
+                                        <rect key="frame" x="17" y="388" width="90" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="push" title="Date" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="CjE-j3-j5J" id="Jub-q3-JYk">
+                                        <popUpButtonCell key="cell" type="push" title="Date" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="CjE-j3-j5J" id="Jub-q3-JYk">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                             <menu key="menu" id="Zap-bs-0ku">
                                                 <items>
-                                                    <menuItem title="Date" state="on" id="CjE-j3-j5J"/>
+                                                    <menuItem title="Date" state="on" hidden="YES" id="CjE-j3-j5J"/>
                                                     <menuItem title="Rating" id="Na3-9z-DZf"/>
                                                     <menuItem title="Title" id="GqR-QR-IqV"/>
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
                                     </popUpButton>
+                                    <popUpButton identifier="sortFilter" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="awA-yg-nXi">
+                                        <rect key="frame" x="17" y="387" width="90" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <popUpButtonCell key="cell" type="push" title="Date" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="c2J-SL-mJi" id="kBM-8P-R55">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <menu key="menu" id="sik-jL-YM2">
+                                                <items>
+                                                    <menuItem title="Date" state="on" hidden="YES" id="c2J-SL-mJi"/>
+                                                    <menuItem title="Rating" id="uHV-zN-VCV"/>
+                                                    <menuItem title="Title" id="FSI-tP-TXJ"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                        <connections>
+                                            <action selector="sortFilter:" target="XfG-lQ-9wD" id="10g-kh-9jM"/>
+                                        </connections>
+                                    </popUpButton>
                                 </subviews>
                             </customView>
-                            <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ARC-QU-YEU">
-                                <rect key="frame" x="139" y="318" width="89" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <levelIndicatorCell key="cell" editable="YES" alignment="left" doubleValue="2" maxValue="5" warningValue="2" criticalValue="2" id="dcw-OQ-d0v"/>
-                                <color key="fillColor" name="systemYellowColor" catalog="System" colorSpace="catalog"/>
-                                <color key="warningFillColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="criticalFillColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            </levelIndicator>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cj1-iD-r6x">
                                 <rect key="frame" x="508" y="13" width="87" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -842,19 +852,22 @@
                                 </textFieldCell>
                             </textField>
                             <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mJ0-zn-ezn">
-                                <rect key="frame" x="139" y="318" width="89" height="18"/>
+                                <rect key="frame" x="140" y="326" width="60" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <levelIndicatorCell key="cell" editable="YES" alignment="left" doubleValue="2" maxValue="5" warningValue="2" criticalValue="2" id="ABk-ey-AH6"/>
+                                <shadow key="shadow">
+                                    <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </shadow>
+                                <levelIndicatorCell key="cell" editable="YES" continuous="YES" alignment="left" doubleValue="2" maxValue="5" tickMarkPosition="above" levelIndicatorStyle="rating" id="ABk-ey-AH6"/>
                                 <color key="fillColor" name="systemYellowColor" catalog="System" colorSpace="catalog"/>
-                                <color key="warningFillColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="criticalFillColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             </levelIndicator>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="addButton" destination="Cj1-iD-r6x" id="hWy-My-Vx3"/>
                         <outlet property="commentsField" destination="8Hd-MG-9vc" id="NEc-sa-N1q"/>
+                        <outlet property="newEntryButton" destination="Cj1-iD-r6x" id="HLX-12-hfk"/>
                         <outlet property="ratingField" destination="mJ0-zn-ezn" id="mnG-vT-8JY"/>
+                        <outlet property="sortChoiceMenu" destination="awA-yg-nXi" id="MpT-C7-fya"/>
                         <outlet property="tableView" destination="SW6-hQ-HzI" id="vjC-pK-FLr"/>
                         <outlet property="titleField" destination="4tp-Lz-GPk" id="OJz-zM-Har"/>
                     </connections>

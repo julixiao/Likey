@@ -57,6 +57,29 @@ struct Entry : Codable {
         let emptyEntry = Entry(title: "", rating: "", comments: "")
         return emptyEntry
     }
+    
+    func decodeStoreJsonFile(filePath: URL, sortMethod: String) -> [Entry] {
+        do {
+            let jData = try Data(contentsOf: filePath, options: .mappedIfSafe)
+            let decoder = JSONDecoder()
+            var reviewsArray = try! decoder.decode([Entry].self, from: jData)
+            if (sortMethod == "Title"){
+                try reviewsArray.sort{
+                    $0.title > $1.title
+                }
+            }
+            else if (sortMethod == "Rating"){
+                try reviewsArray.sort{
+                    $0.rating > $1.rating
+                }
+            }
+            return reviewsArray
+        } catch let err {
+            print (err.localizedDescription)
+        }
+        let emptyList = [Entry(title: "", rating: "", comments: "")]
+        return emptyList
+    }
 }
 
 extension String {
