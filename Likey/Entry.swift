@@ -26,17 +26,14 @@ struct Entry : Codable {
         case comments = "Comments"
     }
     
-    func encodeJson(entry: Entry, filePath: URL) {
+    func encodeJson(filePath: URL) {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
-        //let jsonDict = try! encoder.encode(entry)
 
-        if let jsonDict = try? encoder.encode(entry) {
-            //if let path = Bundle.main.path(forResource: filePath, ofType: "json") {
-            let pathAsURL = filePath
+        if let jsonDict = try? encoder.encode(self) {
             let jsonString = String(data: jsonDict, encoding: String.Encoding.utf8)
             do {
-                try jsonString?.appendLineToURL(fileURL: pathAsURL)
+                try jsonString?.appendLineToURL(fileURL: filePath)
             }
             catch {
                 print("Failed to write JSON data: \(error.localizedDescription)")
@@ -44,41 +41,43 @@ struct Entry : Codable {
         }
     }
     
-    func decodeJsonFile(filePath: URL, row: Int) -> Entry {
+    func decodeJsonFile (filePath: URL) -> [Entry]{
         do {
             let jData = try Data(contentsOf: filePath, options: .mappedIfSafe)
             let decoder = JSONDecoder()
             let reviewsArray = try! decoder.decode([Entry].self, from: jData)
-            return reviewsArray[row]
-        } catch let err {
-            print (err.localizedDescription)
-        }
-    
-        let emptyEntry = Entry(title: "", rating: "", comments: "")
-        return emptyEntry
-    }
-    
-    func decodeStoreJsonFile(filePath: URL, sortMethod: String) -> [Entry] {
-        do {
-            let jData = try Data(contentsOf: filePath, options: .mappedIfSafe)
-            let decoder = JSONDecoder()
-            var reviewsArray = try! decoder.decode([Entry].self, from: jData)
-            if (sortMethod == "Title"){
-                try reviewsArray.sort{
-                    $0.title > $1.title
-                }
-            }
-            else if (sortMethod == "Rating"){
-                try reviewsArray.sort{
-                    $0.rating > $1.rating
-                }
-            }
             return reviewsArray
         } catch let err {
             print (err.localizedDescription)
         }
         let emptyList = [Entry(title: "", rating: "", comments: "")]
         return emptyList
+    }
+    
+    func getJsonEntry(filePath: URL, row: Int) -> Entry {
+        return decodeJsonFile(filePath: filePath)[row]
+    }
+    
+    func sortReviews(filePath: URL, sortMethod: String) {
+        var reviewsArray = decodeJsonFile(filePath: filePath)
+        if (sortMethod == "Title"){
+            reviewsArray.sort{
+                $0.title.lowercased() < $1.title.lowercased()
+            }
+        }
+        else if (sortMethod == "Rating"){
+            reviewsArray.sort{
+                $0.rating > $1.rating
+            }
+        }
+        
+        do{
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let JsonData = try encoder.encode(reviewsArray)
+            try JsonData.write(to: filePath)
+        }
+        catch{}
     }
 }
 
@@ -100,7 +99,7 @@ extension Data {
                 fileHandle.closeFile()
             }
             var bracket = fileHandle.seekToEndOfFile()
-            bracket = bracket-3
+            bracket = bracket-2
             fileHandle.seek(toFileOffset: bracket)
             fileHandle.write(self)
         }

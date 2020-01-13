@@ -796,21 +796,6 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableHeaderView>
                                     </scrollView>
-                                    <popUpButton identifier="sortFilter" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phh-PS-vPm">
-                                        <rect key="frame" x="17" y="388" width="90" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="push" title="Date" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="CjE-j3-j5J" id="Jub-q3-JYk">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                            <menu key="menu" id="Zap-bs-0ku">
-                                                <items>
-                                                    <menuItem title="Date" state="on" hidden="YES" id="CjE-j3-j5J"/>
-                                                    <menuItem title="Rating" id="Na3-9z-DZf"/>
-                                                    <menuItem title="Title" id="GqR-QR-IqV"/>
-                                                </items>
-                                            </menu>
-                                        </popUpButtonCell>
-                                    </popUpButton>
                                     <popUpButton identifier="sortFilter" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="awA-yg-nXi">
                                         <rect key="frame" x="17" y="387" width="90" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -857,7 +842,7 @@
                                 <shadow key="shadow">
                                     <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </shadow>
-                                <levelIndicatorCell key="cell" editable="YES" continuous="YES" alignment="left" doubleValue="2" maxValue="5" tickMarkPosition="above" levelIndicatorStyle="rating" id="ABk-ey-AH6"/>
+                                <levelIndicatorCell key="cell" editable="YES" continuous="YES" alignment="left" doubleValue="-1" maxValue="5" tickMarkPosition="above" levelIndicatorStyle="rating" id="ABk-ey-AH6"/>
                                 <color key="fillColor" name="systemYellowColor" catalog="System" colorSpace="catalog"/>
                             </levelIndicator>
                         </subviews>

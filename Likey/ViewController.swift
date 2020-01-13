@@ -26,10 +26,8 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     @IBAction func sortFilter(_ sender: NSPopUpButton) {
         do{
             if let sortChoice = sortChoiceMenu.titleOfSelectedItem {
-                let reviewsArray = Entry(title: "", rating: "", comments: "").decodeStoreJsonFile(filePath: filePath, sortMethod: sortChoice)
-                for review in reviewsArray{
-                    review.encodeJson(entry: review, filePath: filePath)
-                }
+                sortChoiceMenu.setTitle(sortChoice)
+                Entry(title: "", rating: "", comments: "").sortReviews(filePath: filePath, sortMethod: sortChoice)
                 tableView.reloadData()
             }
         } catch let err {
@@ -39,7 +37,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     @IBAction func addButton(_ sender: Any) {
         let newEntry = Entry(title: titleField.stringValue, rating: ratingField.stringValue, comments: commentsField.stringValue)
-        newEntry.encodeJson(entry: newEntry, filePath: filePath)
+        newEntry.encodeJson(filePath: filePath)
         tableView.reloadData()
         titleField.stringValue = ""
         ratingField.stringValue = ""
@@ -67,7 +65,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
 
     // returns Entry for respective cell
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let entry = Entry(title: "", rating: "", comments: "").decodeJsonFile(filePath: filePath, row: row)
+        let entry = Entry(title: "", rating: "", comments: "").getJsonEntry(filePath: filePath, row: row)
         do {
             if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "reviewCell"), owner: nil) as? NSTableCellView {
                 cell.textField?.stringValue = entry.title
