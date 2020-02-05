@@ -9,6 +9,8 @@
 import Cocoa
 import Foundation
 
+var entries = Entry().initEntries()
+
 struct Entry : Codable {
     var title = ""
     var creators = ""
@@ -24,12 +26,24 @@ struct Entry : Codable {
         self.latestDate = latestDate
     }
     
+    init(){
+        self.title = ""
+        self.creators = ""
+        self.rating = ""
+        self.comments  = ""
+        self.latestDate = 0
+    }
+    
     enum CodingKeys: String, CodingKey {
         case title = "Title"
         case creators = "Creators"
         case rating = "Rating"
         case comments = "Comments"
         case latestDate = "Date"
+    }
+    
+    func initEntries() -> [Entry] {
+        return decodeJsonFile(filePath: filePath)
     }
     
     func firstEncode(filePath: URL){
@@ -71,39 +85,31 @@ struct Entry : Codable {
         } catch let err {
             print (err.localizedDescription)
         }
-        let emptyList = [Entry(title: "", creators: "", rating: "", comments: "", latestDate: 0)]
+        let emptyList = [Entry()]
         return emptyList
     }
     
-    func getJsonEntry(filePath: URL, row: Int) -> Entry {
-        return decodeJsonFile(filePath: filePath)[row]
-    }
-    
     func sortReviews(filePath: URL, sortMethod: String) {
-        var reviewsArray = decodeJsonFile(filePath: filePath)
         if (sortMethod == "Title"){
-            reviewsArray.sort{
+            entries.sort{
                 $0.title.lowercased() < $1.title.lowercased()
             }
         }
         else if (sortMethod == "Rating"){
-            reviewsArray.sort{
+            entries.sort{
                 $0.rating > $1.rating
             }
         }
         else if (sortMethod == "Date"){
-            reviewsArray.sort{
+            entries.sort{
                 $0.latestDate > $1.latestDate
             }
         }
-        
-        do{
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-            let JsonData = try encoder.encode(reviewsArray)
-            try JsonData.write(to: filePath)
+        else if (sortMethod == "Creators"){
+            entries.sort{
+                $0.creators < $1.creators
+            }
         }
-        catch{}
     }
 }
 

@@ -743,7 +743,7 @@
                                                     <tableColumns>
                                                         <tableColumn identifier="reviewColumn" editable="NO" width="116" minWidth="40" maxWidth="1000" id="qwX-NX-56F">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Reviews">
-                                                                <font key="font" metaFont="label" size="11"/>
+                                                                <font key="font" metaFont="controlContent" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -802,6 +802,7 @@
                                                     <menuItem title="Date" hidden="YES" id="c2J-SL-mJi"/>
                                                     <menuItem title="Date" id="ExB-eg-yek"/>
                                                     <menuItem title="Title" id="FSI-tP-TXJ"/>
+                                                    <menuItem title="Creators" id="mfM-yG-oYj"/>
                                                     <menuItem title="Rating" id="uHV-zN-VCV"/>
                                                 </items>
                                             </menu>

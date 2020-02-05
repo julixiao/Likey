@@ -29,7 +29,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         do{
             if let sortChoice = sortChoiceMenu.titleOfSelectedItem {
                 sortChoiceMenu.setTitle(sortChoice)
-                Entry(title: "", creators: "", rating: "", comments: "", latestDate: 0).sortReviews(filePath: filePath, sortMethod: sortChoice)
+                Entry().sortReviews(filePath: filePath, sortMethod: sortChoice)
                 tableView.reloadData()
             }
         } catch let err {
@@ -39,6 +39,9 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     @IBAction func newEntryButton(_ sender: Any) {
         let newEntry = Entry(title: titleField.stringValue, creators: creatorsField.stringValue, rating: ratingField.stringValue, comments: commentsField.stringValue, latestDate: Int(NSDate().timeIntervalSince1970))
+        entries.append(newEntry)
+        tableView.reloadData()
+        
         titleField.stringValue = ""
         ratingField.stringValue = ""
         commentsField.stringValue = ""
@@ -49,7 +52,6 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         else{
             newEntry.encodeJson(filePath: filePath)
         }
-        tableView.reloadData()
     }
     
     func getFilePath() -> URL {
@@ -57,23 +59,12 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        var rows = 0
-        do {
-            let jData = try Data(contentsOf: getFilePath(), options: .mappedIfSafe)
-            if let reviewsArray = try JSONSerialization.jsonObject(with: jData, options: []) as? [Any] {
-                for _ in reviewsArray {
-                    rows += 1
-                }
-            }
-        } catch let err {
-            print (err.localizedDescription)
-        }
-        return rows
+        return entries.count
     }
 
     // returns Entry for respective cell
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let entry = Entry(title: "", creators: "", rating: "", comments: "", latestDate: 0).getJsonEntry(filePath: filePath, row: row)
+        let entry = entries[row]
         do {
             if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "reviewCell"), owner: nil) as? NSTableCellView {
                 cell.textField?.stringValue = entry.title
