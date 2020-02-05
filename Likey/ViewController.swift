@@ -13,6 +13,8 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
 
     @IBOutlet weak var tableView: NSTableView!
     
+    @IBOutlet weak var creatorsField: NSTextFieldCell!
+    
     @IBOutlet weak var titleField: NSTextField!
     
     @IBOutlet weak var commentsField: NSTextField!
@@ -27,7 +29,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         do{
             if let sortChoice = sortChoiceMenu.titleOfSelectedItem {
                 sortChoiceMenu.setTitle(sortChoice)
-                Entry(title: "", rating: "", comments: "").sortReviews(filePath: filePath, sortMethod: sortChoice)
+                Entry(title: "", creators: "", rating: "", comments: "", latestDate: 0).sortReviews(filePath: filePath, sortMethod: sortChoice)
                 tableView.reloadData()
             }
         } catch let err {
@@ -35,13 +37,19 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         }
     }
     
-    @IBAction func addButton(_ sender: Any) {
-        let newEntry = Entry(title: titleField.stringValue, rating: ratingField.stringValue, comments: commentsField.stringValue)
-        newEntry.encodeJson(filePath: filePath)
-        tableView.reloadData()
+    @IBAction func newEntryButton(_ sender: Any) {
+        let newEntry = Entry(title: titleField.stringValue, creators: creatorsField.stringValue, rating: ratingField.stringValue, comments: commentsField.stringValue, latestDate: Int(NSDate().timeIntervalSince1970))
         titleField.stringValue = ""
         ratingField.stringValue = ""
         commentsField.stringValue = ""
+        creatorsField.stringValue = ""
+        if (numberOfRows(in: tableView) == 0){
+            newEntry.firstEncode(filePath: filePath)
+        }
+        else{
+            newEntry.encodeJson(filePath: filePath)
+        }
+        tableView.reloadData()
     }
     
     func getFilePath() -> URL {
@@ -65,7 +73,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
 
     // returns Entry for respective cell
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let entry = Entry(title: "", rating: "", comments: "").getJsonEntry(filePath: filePath, row: row)
+        let entry = Entry(title: "", creators: "", rating: "", comments: "", latestDate: 0).getJsonEntry(filePath: filePath, row: row)
         do {
             if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "reviewCell"), owner: nil) as? NSTableCellView {
                 cell.textField?.stringValue = entry.title

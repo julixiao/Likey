@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E34A3A3C23EA76B20003396B /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34A3A3B23EA76B20003396B /* PrefsViewController.swift */; };
 		E3B77B0323C620C200D79116 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B77B0223C620C200D79116 /* Entry.swift */; };
 		E3C99B6F2247F958009640EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C99B6E2247F958009640EE /* AppDelegate.swift */; };
 		E3C99B712247F958009640EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C99B702247F958009640EE /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
+		E34A3A3B23EA76B20003396B /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
 		E3B77B0223C620C200D79116 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		E3C99B6B2247F958009640EE /* Likey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Likey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3C99B6E2247F958009640EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			children = (
 				E3C99B6E2247F958009640EE /* AppDelegate.swift */,
 				E3C99B702247F958009640EE /* ViewController.swift */,
+				E34A3A3B23EA76B20003396B /* PrefsViewController.swift */,
 				E3B77B0223C620C200D79116 /* Entry.swift */,
 				E3C99B722247F960009640EE /* Assets.xcassets */,
 				E3C99B742247F961009640EE /* Main.storyboard */,
@@ -158,6 +161,7 @@
 				E3B77B0323C620C200D79116 /* Entry.swift in Sources */,
 				E3C99B712247F958009640EE /* ViewController.swift in Sources */,
 				E3C99B6F2247F958009640EE /* AppDelegate.swift in Sources */,
+				E34A3A3C23EA76B20003396B /* PrefsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +298,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Likey/Likey.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -304,6 +309,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = julixiao.Likey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -312,6 +318,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Likey/Likey.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;

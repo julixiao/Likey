@@ -11,19 +11,40 @@ import Foundation
 
 struct Entry : Codable {
     var title = ""
+    var creators = ""
     var rating = ""
     var comments = ""
+    var latestDate = 0
     
-    init(title: String, rating: String, comments: String) {
-        self.title   = title
+    init(title: String, creators: String, rating: String, comments: String, latestDate: Int) {
+        self.title = title
+        self.creators = creators
         self.rating = rating
         self.comments  = comments
+        self.latestDate = latestDate
     }
     
     enum CodingKeys: String, CodingKey {
         case title = "Title"
+        case creators = "Creators"
         case rating = "Rating"
         case comments = "Comments"
+        case latestDate = "Date"
+    }
+    
+    func firstEncode(filePath: URL){
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        if let jsonDict = try? encoder.encode(self) {
+            let jsonString = String(data: jsonDict, encoding: String.Encoding.utf8)
+            do {
+                try jsonString?.appendFirstLinetoURL(fileUrl: filePath)
+            }
+            catch {
+                print("Failed to write JSON data: \(error.localizedDescription)")
+            }
+        }
     }
     
     func encodeJson(filePath: URL) {
@@ -50,7 +71,7 @@ struct Entry : Codable {
         } catch let err {
             print (err.localizedDescription)
         }
-        let emptyList = [Entry(title: "", rating: "", comments: "")]
+        let emptyList = [Entry(title: "", creators: "", rating: "", comments: "", latestDate: 0)]
         return emptyList
     }
     
@@ -70,6 +91,11 @@ struct Entry : Codable {
                 $0.rating > $1.rating
             }
         }
+        else if (sortMethod == "Date"){
+            reviewsArray.sort{
+                $0.latestDate > $1.latestDate
+            }
+        }
         
         do{
             let encoder = JSONEncoder()
@@ -82,8 +108,11 @@ struct Entry : Codable {
 }
 
 extension String {
+    func appendFirstLinetoURL(fileUrl: URL) throws {
+        try ("[ \n" + self + "\n ]").appendToURL(fileURL: filePath)
+    }
     func appendLineToURL(fileURL: URL) throws {
-        try (", \n" + self + "\n ]").appendToURL(fileURL: fileURL)
+        try (", \n" + self + "\n ]").appendToURL(fileURL: filePath)
     }
 
     func appendToURL(fileURL: URL) throws {
