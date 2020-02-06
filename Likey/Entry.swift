@@ -11,6 +11,7 @@ import Foundation
 
 var entries = Entry().initEntries()
 
+// Class detailing properties and actions of an Entry
 struct Entry : Codable {
     var title = ""
     var creators = ""
@@ -18,12 +19,12 @@ struct Entry : Codable {
     var comments = ""
     var latestDate = 0
     
-    init(title: String, creators: String, rating: String, comments: String, latestDate: Int) {
-        self.title = title
-        self.creators = creators
-        self.rating = rating
-        self.comments  = comments
-        self.latestDate = latestDate
+    enum CodingKeys: String, CodingKey {
+        case title = "Title"
+        case creators = "Creators"
+        case rating = "Rating"
+        case comments = "Comments"
+        case latestDate = "Date"
     }
     
     init(){
@@ -34,18 +35,19 @@ struct Entry : Codable {
         self.latestDate = 0
     }
     
-    enum CodingKeys: String, CodingKey {
-        case title = "Title"
-        case creators = "Creators"
-        case rating = "Rating"
-        case comments = "Comments"
-        case latestDate = "Date"
+    init(title: String, creators: String, rating: String, comments: String, latestDate: Int) {
+        self.title = title
+        self.creators = creators
+        self.rating = rating
+        self.comments  = comments
+        self.latestDate = latestDate
     }
     
     func initEntries() -> [Entry] {
         return decodeJsonFile(filePath: filePath)
     }
     
+    // Function for first entry in JSON file
     func firstEncode(filePath: URL){
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -76,6 +78,7 @@ struct Entry : Codable {
         }
     }
     
+    // Decoding JSON file into [Entry]
     func decodeJsonFile (filePath: URL) -> [Entry]{
         do {
             let jData = try Data(contentsOf: filePath, options: .mappedIfSafe)
@@ -89,6 +92,7 @@ struct Entry : Codable {
         return emptyList
     }
     
+    // Function determining how to sort table view
     func sortReviews(filePath: URL, sortMethod: String) {
         if (sortMethod == "Title"){
             entries.sort{

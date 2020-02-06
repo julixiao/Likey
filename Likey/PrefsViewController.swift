@@ -14,23 +14,24 @@ class PrefsViewController: NSViewController {
 
     @IBOutlet weak var currentFilePath: NSTextField!
     
+    @IBOutlet weak var setPrefsButton: NSButton!
+    
+    // Function for setting preferences button
     @IBAction func setPreferences(_ sender: Any) {
         filePath = URL(fileURLWithPath: filePathField.stringValue)
-        self.view.window?.windowController?.close()
-        do {
-            currentFilePath.stringValue = try String(contentsOf: filePath)
-        }
-        catch let err {
-            print (err.localizedDescription)
-        }
+        currentFilePath.stringValue = filePath.absoluteString
+        entries = Entry().initEntries()
+        entries.remove(at: 0)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update table"), object: nil)
     }
     
+    // Function for cancel button
     @IBAction func cancelButton(_ sender: Any) {
         self.view.window?.windowController?.close()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        currentFilePath.stringValue = filePath.absoluteString
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
 

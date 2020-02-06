@@ -821,7 +821,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="newEntryButton:" target="XfG-lQ-9wD" id="cyn-5G-0O1"/>
+                                    <action selector="entryActionButton:" target="XfG-lQ-9wD" id="cyn-5G-0O1"/>
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Hd-MG-9vc">
@@ -856,7 +856,7 @@
                     <connections>
                         <outlet property="commentsField" destination="8Hd-MG-9vc" id="NEc-sa-N1q"/>
                         <outlet property="creatorsField" destination="E70-nd-yhf" id="rKy-Mw-TwI"/>
-                        <outlet property="newEntryButton" destination="Cj1-iD-r6x" id="HLX-12-hfk"/>
+                        <outlet property="entryActionButton" destination="Cj1-iD-r6x" id="HLX-12-hfk"/>
                         <outlet property="ratingField" destination="mJ0-zn-ezn" id="mnG-vT-8JY"/>
                         <outlet property="sortChoiceMenu" destination="awA-yg-nXi" id="MpT-C7-fya"/>
                         <outlet property="tableView" destination="SW6-hQ-HzI" id="vjC-pK-FLr"/>
@@ -894,7 +894,7 @@
                 <customObject id="iLw-dX-a8Z" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController id="uOb-Po-bqa" customClass="PrefsViewController" customModule="Likey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="mwX-lK-6Dq">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="113"/>
+                        <rect key="frame" x="0.0" y="0.0" width="487" height="120"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ub-yp-8vp">
@@ -907,9 +907,18 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ULS-0A-Fyd">
-                                <rect key="frame" x="18" y="63" width="81" height="17"/>
+                                <rect key="frame" x="18" y="55" width="81" height="17"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="File Location" id="LVK-wS-3XU">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="koS-Gw-9br">
+                                <rect key="frame" x="18" y="83" width="75" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Current File" id="z4J-x9-WG0">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -957,10 +966,11 @@ Gw
                     <connections>
                         <outlet property="currentFilePath" destination="2HE-Hf-ZUN" id="ZoD-lR-nus"/>
                         <outlet property="filePathField" destination="7ub-yp-8vp" id="TFQ-7h-9Pm"/>
+                        <outlet property="setPrefsButton" destination="OfN-Fo-dvo" id="Dq7-Mt-q8Z"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1360" y="130.5"/>
+            <point key="canvasLocation" x="1363.5" y="134"/>
         </scene>
     </scenes>
 </document>
