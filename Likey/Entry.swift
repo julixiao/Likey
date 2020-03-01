@@ -88,7 +88,8 @@ struct Entry : Codable {
         } catch let err {
             print (err.localizedDescription)
         }
-        let emptyList = [Entry()]
+        var emptyList = [Entry()]
+        emptyList.remove(at: 0)
         return emptyList
     }
     

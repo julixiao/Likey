@@ -21,7 +21,7 @@ class PrefsViewController: NSViewController {
         filePath = URL(fileURLWithPath: filePathField.stringValue)
         currentFilePath.stringValue = filePath.absoluteString
         entries = Entry().initEntries()
-        entries.remove(at: 0)
+        //entries.remove(at: 0)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update table"), object: nil)
     }
     
