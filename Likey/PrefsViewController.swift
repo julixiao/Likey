@@ -9,11 +9,8 @@
 import Cocoa
 
 class PrefsViewController: NSViewController {
-    
     @IBOutlet weak var filePathField: NSTextField!
-
     @IBOutlet weak var currentFilePath: NSTextField!
-    
     @IBOutlet weak var setPrefsButton: NSButton!
     
     // Function for setting preferences button
@@ -34,5 +31,4 @@ class PrefsViewController: NSViewController {
         currentFilePath.stringValue = filePath.absoluteString
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
-
 }

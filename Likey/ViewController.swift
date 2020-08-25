@@ -10,19 +10,12 @@ import Cocoa
 var filePath = URL(fileURLWithPath: "/Users/Julie/Downloads/reviews.json")
 
 class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
-
     @IBOutlet weak var tableView: NSTableView!
-    
     @IBOutlet weak var creatorsField: NSTextFieldCell!
-    
     @IBOutlet weak var titleField: NSTextField!
-    
     @IBOutlet weak var commentsField: NSTextField!
-    
     @IBOutlet weak var ratingField: NSLevelIndicator!
-    
     @IBOutlet weak var sortChoiceMenu: NSPopUpButton!
-    
     @IBOutlet weak var entryActionButton: NSButton!
     
     var toDeleteIndex = 0
@@ -104,6 +97,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         viewEntry()
     }
 
+    
     // Deals with viewing entry; triggered by selection of table view cell
     func viewEntry() {
         if tableView.selectedRow >= 0 {
