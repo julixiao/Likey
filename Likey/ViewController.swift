@@ -7,7 +7,7 @@
 //
 import Cocoa
 
-var filePath = URL(fileURLWithPath: "/Users/Julie/Downloads/reviews.json")
+var filePath = URL(fileURLWithPath: "/Users/juliexiao/Downloads/reviews.json")
 
 class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     @IBOutlet weak var tableView: NSTableView!
